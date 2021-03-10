@@ -42,6 +42,7 @@ $routes->get("notifications-mgt","PageLoader::notifications");
 $routes->get("add-new-notification","PageLoader::add_new_notif");
 
 $routes->post("create-notification-exe","Notifications::add");
+$routes->post("delete-notification-exe","Notifications::delete");
 
 /*
  * --------------------------------------------------------------------
