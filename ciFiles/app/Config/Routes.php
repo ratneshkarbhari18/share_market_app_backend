@@ -38,6 +38,11 @@ $routes->get('login', 'PageLoader::login');
 $routes->post('login-exe', 'Authentication::login');
 $routes->get('logout-exe', 'Authentication::logout');
 
+$routes->get("notifications-mgt","PageLoader::notifications");
+$routes->get("add-new-notification","PageLoader::add_new_notif");
+
+$routes->post("create-notification-exe","Notifications::add");
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

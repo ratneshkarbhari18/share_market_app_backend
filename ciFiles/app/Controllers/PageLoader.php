@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\NotifModel;
 
 class PageLoader extends BaseController
 {
@@ -25,6 +26,20 @@ class PageLoader extends BaseController
 		$this->page_loader("dashboard",$data);
 	}
 
+	public function add_new_notif($success="",$error=""){
+		$session = session();
+		$logged_in = $session->get("logged_in");
+		if(!$logged_in){
+			$this->dashboard();
+		}
+		$data = array(
+			"title" => "Add New Notification",
+			"success" => $success,
+			"error" => $error,
+		);
+		$this->page_loader("add_new_notif",$data);
+	}
+
 	public function login($error=""){
 		$data = array(
 			"title" => "Login",
@@ -32,4 +47,22 @@ class PageLoader extends BaseController
 		);
 		$this->page_loader("login",$data);
 	}
+
+	public function notifications($success="",$error="")	{
+		$session = session();
+		$logged_in = $session->get("logged_in");
+		if(!$logged_in){
+			$this->dashboard();
+		}
+		$notificationModel = new NotifModel();
+		$notifications = array_reverse($notificationModel->orderBy('id', 'desc')->findAll(10,0));
+		$data = array(
+			"title" => "Notifications",
+			"notifications" => $notifications,
+			"success" => $success,
+			"error" => $error
+		);
+		$this->page_loader("manage_notifications",$data);
+	}
+
 }

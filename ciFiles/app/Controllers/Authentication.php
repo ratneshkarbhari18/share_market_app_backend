@@ -23,7 +23,7 @@ class Authentication extends BaseController
         if ($entered_email==""||$entered_password=="") {
             $pageLoader->login("Please enter both email and password");
         } else {
-            $userData = $authModel->where("email",$entered_email)->first();
+            $userData = $authModel->where("email",$entered_email)->where("role","admin")->where("status","active")->first();
             if ($userData) {
                 if (password_verify($entered_password,$userData["password"])) {
                     $sessionData = array(
