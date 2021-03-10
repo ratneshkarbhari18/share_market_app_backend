@@ -10,13 +10,11 @@
                 <p class="red-text"><?php echo $error; ?></p>
             </div>            
 
-
-
             <form action="<?php echo site_url("login-exe"); ?>" method="post">
 
                 <div class="input-fieldx">
-                    <label for="username">Username</label>
-                    <input type="text" name="username" id="username">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email">
                 </div>
 
                 <div class="input-fieldx">

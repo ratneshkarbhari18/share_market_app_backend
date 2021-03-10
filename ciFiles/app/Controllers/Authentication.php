@@ -14,22 +14,22 @@ class Authentication extends BaseController
 			return redirect()->route('/');
         }
 
-        $entered_username = $this->request->getPost("username");
+        $entered_email = $this->request->getPost("email");
         $entered_password = $this->request->getPost("password");
 
         $pageLoader = new PageLoader();
         $authModel = new AuthModel();
 
-        if ($entered_username==""||$entered_password=="") {
-            $pageLoader->login("Please enter both username and password");
+        if ($entered_email==""||$entered_password=="") {
+            $pageLoader->login("Please enter both email and password");
         } else {
-            $userData = $authModel->where("username",$entered_username)->first();
+            $userData = $authModel->where("email",$entered_email)->first();
             if ($userData) {
                 if (password_verify($entered_password,$userData["password"])) {
                     $sessionData = array(
                         "first_name" => $userData["first_name"],
                         "last_name" => $userData["last_name"],
-                        "username" => $userData["username"],
+                        "email" => $userData["email"],
                         "logged_in" => TRUE,
                     );
                     $session->set($sessionData);
@@ -38,7 +38,7 @@ class Authentication extends BaseController
                     $pageLoader->login("Password is incorrect");
                 }
             } else {
-                $pageLoader->login("Username is incorrect");
+                $pageLoader->login("email is incorrect");
             }
         }
         
