@@ -30,6 +30,7 @@ class Authentication extends BaseController
                         "first_name" => $userData["first_name"],
                         "last_name" => $userData["last_name"],
                         "email" => $userData["email"],
+                        "role" => $userData["role"],
                         "logged_in" => TRUE,
                     );
                     $session->set($sessionData);
@@ -43,6 +44,42 @@ class Authentication extends BaseController
         }
         
     }
+
+    public function subscriber_login(){
+        $expected_api_key = "5f4dbf2e5629d8cc19e7d51874266678";
+        $recieved_api_key = $this->request->getPost("api_key");
+        if ($recieved_api_key==$expected_api_key) {
+            $entered_email = $this->request->getPost("email");
+            $entered_password = $this->request->getPost("password");
+            $authModel = new AuthModel();
+            $subData = $authModel->where("role","subscriber")->where("status","active")->where("email",$entered_email)->first();
+            if ($subData) {
+                $password_correct = password_verify($entered_password,$subData["password"]);
+                if ($password_correct) {
+                    return json_encode(array(
+                        "result" => "success",
+                        "sub_data" => json_encode($subData)
+                    ));
+                } else {
+                    return json_encode(array(
+                        "result" => "failure",
+                        "reason" => "Password is incorrect"
+                    ));
+                }
+            } else {
+                return json_encode(array(
+                    "result" => "failure",
+                    "reason" => "Email is incorrect"
+                ));
+            }
+        } else {
+            return json_encode(array(
+                "result" => "failure",
+                "reason" => "API Key is incorrect"
+            ));
+        }   
+    }
+
     public function logout(){
         $session = session();
         $session->destroy();

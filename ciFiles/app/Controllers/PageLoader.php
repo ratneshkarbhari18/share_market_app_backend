@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\NotifModel;
+use App\Models\AuthModel;
 
 class PageLoader extends BaseController
 {
@@ -48,7 +49,7 @@ class PageLoader extends BaseController
 		$this->page_loader("login",$data);
 	}
 
-	public function notifications($success="",$error="")	{
+	public function notifications($success="",$error=""){
 		$session = session();
 		$logged_in = $session->get("logged_in");
 		if(!$logged_in){
@@ -63,6 +64,37 @@ class PageLoader extends BaseController
 			"error" => $error
 		);
 		$this->page_loader("manage_notifications",$data);
+	}
+
+	public function manage_subscribers($success="",$error=""){
+		$session = session();
+		$role = $session->get("role");
+		if($role!="admin"){
+			return redirect()->route("/");
+		}
+		$authModel = new AuthModel();
+		$subscribers = array_reverse($authModel->where("role","subscriber")->orderBy('id', 'desc')->findAll());
+		$data = array(
+			"title" => "Subscribers",
+			"subscribers" => $subscribers,
+			"success" => $success,
+			"error" => $error
+		);
+		$this->page_loader("manage_subscribers",$data);
+	}
+
+	public function add_new_subscriber($success="",$error=""){
+		$session = session();
+		$role = $session->get("role");
+		if($role!="admin"){
+			return redirect()->route("/");
+		}
+		$data  = array(
+			"title" => "Add New Subscriber",
+			"success" => $success,
+			"error" => $error
+		);
+		$this->page_loader("add_new_subscriber",$data);
 	}
 
 }

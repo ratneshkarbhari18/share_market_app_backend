@@ -25,6 +25,7 @@
                         </div></li>
                         <li><a class="waves-effect" href="<?php echo site_url(); ?>">Dashboard</a></li>
                         <li><a class="waves-effect" href="<?php echo site_url("notifications-mgt"); ?>">Notifications</a></li>
+                        <li><a class="waves-effect" href="<?php echo site_url("subscribers-mgt"); ?>">Subscribers</a></li>
                         <li><a class="waves-effect" href="<?php echo site_url("cms-mgt"); ?>">CMS</a></li>
                     </ul>
                     <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>

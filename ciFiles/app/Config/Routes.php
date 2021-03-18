@@ -44,6 +44,16 @@ $routes->get("add-new-notification","PageLoader::add_new_notif");
 $routes->post("create-notification-exe","Notifications::add");
 $routes->post("delete-notification-exe","Notifications::delete");
 
+$routes->post("jaldi-five-notif-fetch","Notifications::jaldi_five");
+
+$routes->get("subscribers-mgt","PageLoader::manage_subscribers");
+$routes->get("add-new-subscriber","PageLoader::add_new_subscriber");
+
+$routes->post("create-subscriber-exe","Subscribers::create_new");
+$routes->post("deactivate-subscriber-exe","Subscribers::deactivate");
+
+$routes->post("subscriber-login-api","Authentication::subscriber_login");
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

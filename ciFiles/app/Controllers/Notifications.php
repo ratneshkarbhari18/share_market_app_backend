@@ -36,4 +36,24 @@ class Notifications extends BaseController
         return redirect()->route('notifications-mgt');
     }
 
+    public function jaldi_five(){
+        $api_key = $this->request->getPost("api_key");
+        if($api_key!="5f4dbf2e5629d8cc19e7d51874266678"){
+            return json_encode(
+                array(
+                    "result" => "failure",
+                    "reason" => "API Key is incorrect"
+                )
+            );
+        }
+        $notifModel = new NotifModel();
+        $notifications = $notifModel->orderBy("id","desc")->findAll();
+        return json_encode(
+            array(
+                "result" => "success",
+                "notifications" => $notifications
+            )
+        );
+    }
+
 }
