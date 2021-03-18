@@ -17,7 +17,8 @@ class Notifications extends BaseController
             "name" => $this->request->getPost("name"),
             "market_price" => $this->request->getPost("current_price"),
             "buy_price" => $this->request->getPost("buy_price"),
-            "stop_loss" => $this->request->getPost("stop_loss")
+            "stop_loss" => $this->request->getPost("stop_loss"),
+            "date" => date("d-m-Y")
         );
         $notifModel = new NotifModel();
         $created = $notifModel->insert($noticeData);

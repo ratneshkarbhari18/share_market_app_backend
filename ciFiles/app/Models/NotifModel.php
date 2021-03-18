@@ -9,6 +9,6 @@ class NotifModel extends Model
 
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['name', 'buy_price','stop_loss','market_price'];
+    protected $allowedFields = ['name', 'buy_price','stop_loss','market_price','date'];
 
 }
