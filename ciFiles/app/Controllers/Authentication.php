@@ -80,6 +80,52 @@ class Authentication extends BaseController
         }   
     }
 
+
+    public function subscriber_register(){
+        $expected_api_key = "5f4dbf2e5629d8cc19e7d51874266678";
+        $recieved_api_key = $this->request->getPost("api_key");
+        if ($recieved_api_key==$expected_api_key) {
+            $entered_first_name = $this->request->getPost("first_name");
+            $entered_last_name = $this->request->getPost("last_name");
+            $entered_email = $this->request->getPost("email");
+            $entered_password = $this->request->getPost("password");
+            $authModel = new AuthModel();
+            $subscriberExists = $authModel->where("email",$entered_email)->first();
+            if ($subscriberExists) {
+                return json_encode(array(
+                    "result" => "failure",
+                    "reason" => "A subsrciber with this email address already exists"
+                ));
+            } else {
+                $dataToInsert = array(
+                    "first_name" => $entered_first_name,
+                    "last_name" => $entered_last_name,
+                    "email" => $entered_email,
+                    "password" => password_hash($entered_password,PASSWORD_DEFAULT),
+                    "role" => "subscriber",
+                    "status" => "active"
+                );
+                $created = $authModel->insert($dataToInsert);
+                if ($created) {
+                    return json_encode(array(
+                        "result" => "success",
+                        "reason" => "Account Created Successfully"
+                    ));
+                } else {
+                    return json_encode(array(
+                        "result" => "failure",
+                        "reason" => "Account Could Not be Created"
+                    ));
+                }
+            }
+        }else {
+            return json_encode(array(
+                "result" => "failure",
+                "reason" => "API Key is incorrect"
+            ));
+        }
+    }
+
     public function logout(){
         $session = session();
         $session->destroy();

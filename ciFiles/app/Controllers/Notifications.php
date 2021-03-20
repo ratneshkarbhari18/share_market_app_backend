@@ -13,18 +13,21 @@ class Notifications extends BaseController
 		if(!$logged_in){
 			$this->dashboard();
 		}
+        date_default_timezone_set("Asia/Kolkata");
         $noticeData = array(
             "name" => $this->request->getPost("name"),
             "market_price" => $this->request->getPost("current_price"),
             "buy_price" => $this->request->getPost("buy_price"),
             "stop_loss" => $this->request->getPost("stop_loss"),
-            "date" => date("d-m-Y")
+            "date" => date("d-m-Y h:i:sa")
         );
         $notifModel = new NotifModel();
         $created = $notifModel->insert($noticeData);
         return redirect()->route('notifications-mgt');
     }
 
+
+    
     public function delete(){
         $session = session();
 		$logged_in = $session->get("logged_in");

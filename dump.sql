@@ -28,8 +28,9 @@ CREATE TABLE `notiications` (
   `buy_price` decimal(10,2) NOT NULL,
   `stop_loss` decimal(10,2) NOT NULL,
   `market_price` decimal(10,2) NOT NULL,
+  `date` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +39,7 @@ CREATE TABLE `notiications` (
 
 LOCK TABLES `notiications` WRITE;
 /*!40000 ALTER TABLE `notiications` DISABLE KEYS */;
-INSERT INTO `notiications` VALUES (2,'Adani Power',10.00,8.00,12.00),(3,'Nestle India',12.00,10.00,15.00),(5,'IDBI Bank',16.00,20.00,25.00),(6,'ICICI Bank',8.00,9.00,10.00),(7,'Market is volatile ',16.21,23.00,15.50);
+INSERT INTO `notiications` VALUES (2,'Adani Power',9.50,8.00,10.00,'18-03-2021 04:42:45pm');
 /*!40000 ALTER TABLE `notiications` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,7 +110,7 @@ CREATE TABLE `users` (
   `role` text NOT NULL,
   `status` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,7 +119,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Ratnesh','Karbhari','ratneshkarbhari74@gmail.com','$2y$10$Rw.BIbApcJUOmVFvFIyRVeae4l2sLiW5NhNeNvsOzQ1LwO/Q.JBfS','admin','active'),(6,'Ratnesh','Karbhari','ratneshkarbhari74@gmail.com','$2y$10$e2FVEgx7vaOT4AVpl/QHmu3fGOEWys8PP58DpZL2k3z592R0la.V2','subscriber','active');
+INSERT INTO `users` VALUES (1,'Ratnesh','Karbhari','ratneshkarbhari74@gmail.com','$2y$10$Rw.BIbApcJUOmVFvFIyRVeae4l2sLiW5NhNeNvsOzQ1LwO/Q.JBfS','admin','active'),(6,'Ratnesh','Karbhari','ratneshkarbhari74@gmail.com','$2y$10$e2FVEgx7vaOT4AVpl/QHmu3fGOEWys8PP58DpZL2k3z592R0la.V2','subscriber','active'),(7,'Ratnvh','bhkb','rkarbhari23@gmail.com','$2y$10$FTW4DsRjLzfxdktJiHEfauQONjhdmnnldvLIYa6PVbbCJni5ijt2G','subscriber','active'),(8,'Satish','kandregula','satish.m.kandregula@gmail.com','$2y$10$CwN9wL55OCoc0KjTieTFUOPS5H96U28JMFr7Cx6GkWc4IkGerxUTS','subscriber','active');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -131,4 +132,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-18  7:51:23
+-- Dump completed on 2021-03-20 11:35:03

@@ -53,6 +53,7 @@ $routes->post("create-subscriber-exe","Subscribers::create_new");
 $routes->post("deactivate-subscriber-exe","Subscribers::deactivate");
 
 $routes->post("subscriber-login-api","Authentication::subscriber_login");
+$routes->post("subscriber-register-api","Authentication::subscriber_register");
 
 /*
  * --------------------------------------------------------------------
