@@ -81,6 +81,20 @@ class Authentication extends BaseController
     }
 
 
+    public function update_subscriber_profile(){
+        $expected_api_key = "5f4dbf2e5629d8cc19e7d51874266678";
+        $recieved_api_key = $this->request->getPost("api_key");
+        if ($recieved_api_key==$expected_api_key) {
+            
+        }else {
+            return json_encode(array(
+                "result" => "failure",
+                "reason" => "API Key is incorrect"
+            ));
+        }
+    }
+
+
     public function subscriber_register(){
         $expected_api_key = "5f4dbf2e5629d8cc19e7d51874266678";
         $recieved_api_key = $this->request->getPost("api_key");

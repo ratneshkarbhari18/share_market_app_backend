@@ -23,6 +23,40 @@ class Notifications extends BaseController
         );
         $notifModel = new NotifModel();
         $created = $notifModel->insert($noticeData);
+        if($created){
+            $curl = curl_init();
+            $body = 'Market Price: '.$noticeData["market_price"].' Buy Price: '.$noticeData["buy_price"].' Stop Loss: '.$noticeData["stop_loss"];
+            curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://fcm.googleapis.com/fcm/send',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS =>'{
+                "notification": {
+                    "title": "'.$noticeData["name"].'",
+                    "body": "'.$body.'"
+                },
+                "priority": "high",
+                "data": {
+                    "clickaction": "FLUTTER_NOTIFICATION_CLICK",
+                    "id": "1",
+                    "status": "done"
+                },
+                "to": "/topics/all"
+            }',
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json',
+                'Authorization: key=AAAAXqzflPQ:APA91bEs16tt8HyUxcCcXFPPPXoKfrZvFQFpj1SbU8bn5HNm05dL3Ieb9TIHulwo-n8lYCK5mcKX6FxbY67L62JrJSMRuMTdgI3UhtO5XoxYaCbSObnqoAE5WH9gV9Br4VJXTFxNaYQE'
+            ),
+            ));
+
+            $response = curl_exec($curl);
+
+        }
         return redirect()->route('notifications-mgt');
     }
 
