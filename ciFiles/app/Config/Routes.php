@@ -56,6 +56,7 @@ $routes->post("subscriber-login-api","Authentication::subscriber_login");
 $routes->post("subscriber-register-api","Authentication::subscriber_register");
 
 $routes->post("lead-gen-contact-form-api","Contact::save_contact_message");
+$routes->get("contact-form-messages","PageLoader::contact_form_messages");
 
 /*
  * --------------------------------------------------------------------

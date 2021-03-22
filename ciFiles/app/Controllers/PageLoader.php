@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use App\Models\NotifModel;
 use App\Models\AuthModel;
+use App\Models\LeadModel;
 
 class PageLoader extends BaseController
 {
@@ -53,7 +54,7 @@ class PageLoader extends BaseController
 		$session = session();
 		$logged_in = $session->get("logged_in");
 		if(!$logged_in){
-			$this->dashboard();
+			return redirect()->route("/");
 		}
 		$notificationModel = new NotifModel();
 		$notifications = array_reverse($notificationModel->orderBy('id', 'desc')->findAll(10,0));
@@ -81,6 +82,23 @@ class PageLoader extends BaseController
 			"error" => $error
 		);
 		$this->page_loader("manage_subscribers",$data);
+	}
+
+	public function contact_form_messages($success="",$error=""){
+		$session = session();
+		$role = $session->get("role");
+		if($role!="admin"){
+			return redirect()->route("/");
+		}
+		$leadModel = new LeadModel();
+		$messages = array_reverse($leadModel->findAll());
+		$data = array(
+			"title" => "From Contact Form",
+			"messages" => $messages,
+			"success" => $success,
+			"error" => $error
+		);
+		$this->page_loader("manage_messages",$data);
 	}
 
 	public function add_new_subscriber($success="",$error=""){
