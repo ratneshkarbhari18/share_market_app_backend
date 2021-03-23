@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controllers;
-use App\Models\NotifModel;
+use App\Models\DailyHoroscopeModel;
 use App\Models\AuthModel;
 use App\Models\LeadModel;
 
@@ -15,6 +15,7 @@ class PageLoader extends BaseController
 	}
 
 	public function dashboard(){
+
 		$session = session();
 
 		$logged_in = $session->get("logged_in");
@@ -28,18 +29,18 @@ class PageLoader extends BaseController
 		$this->page_loader("dashboard",$data);
 	}
 
-	public function add_new_notif($success="",$error=""){
+	public function add_new_horoscope($success="",$error=""){
 		$session = session();
 		$logged_in = $session->get("logged_in");
 		if(!$logged_in){
 			$this->dashboard();
 		}
 		$data = array(
-			"title" => "Add New Notification",
+			"title" => "Add New Horoscope",
 			"success" => $success,
 			"error" => $error,
 		);
-		$this->page_loader("add_new_notif",$data);
+		$this->page_loader("add_new_horoscope",$data);
 	}
 
 	public function login($error=""){
@@ -50,21 +51,21 @@ class PageLoader extends BaseController
 		$this->page_loader("login",$data);
 	}
 
-	public function notifications($success="",$error=""){
+	public function daily_horoscopes($success="",$error=""){
 		$session = session();
 		$logged_in = $session->get("logged_in");
 		if(!$logged_in){
 			return redirect()->route("/");
 		}
-		$notificationModel = new NotifModel();
-		$notifications = array_reverse($notificationModel->orderBy('id', 'desc')->findAll(10,0));
+		$dailyHoroscopeModel = new DailyHoroscopeModel();
+		$horoscopes = array_reverse($dailyHoroscopeModel->orderBy('id', 'desc')->findAll(10,0));
 		$data = array(
-			"title" => "Notifications",
-			"notifications" => $notifications,
+			"title" => "Daily Horoscopes",
+			"horoscopes" => $horoscopes,
 			"success" => $success,
 			"error" => $error
 		);
-		$this->page_loader("manage_notifications",$data);
+		$this->page_loader("manage_horoscopes",$data);
 	}
 
 	public function manage_subscribers($success="",$error=""){

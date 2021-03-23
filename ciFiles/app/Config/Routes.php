@@ -38,11 +38,11 @@ $routes->get('login', 'PageLoader::login');
 $routes->post('login-exe', 'Authentication::login');
 $routes->get('logout-exe', 'Authentication::logout');
 
-$routes->get("notifications-mgt","PageLoader::notifications");
-$routes->get("add-new-notification","PageLoader::add_new_notif");
+$routes->get("daily-horoscopes","PageLoader::daily_horoscopes");
+$routes->get("add-new-horoscope","PageLoader::add_new_horoscope");
 
-$routes->post("create-notification-exe","Notifications::add");
-$routes->post("delete-notification-exe","Notifications::delete");
+$routes->post("create-horoscope-exe","DailyHoroscopes::add");
+$routes->post("delete-horoscope-exe","DailyHoroscopes::delete");
 
 $routes->post("jaldi-five-notif-fetch","Notifications::jaldi_five");
 
