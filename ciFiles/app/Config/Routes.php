@@ -44,7 +44,7 @@ $routes->get("add-new-horoscope","PageLoader::add_new_horoscope");
 $routes->post("create-horoscope-exe","DailyHoroscopes::add");
 $routes->post("delete-horoscope-exe","DailyHoroscopes::delete");
 
-$routes->post("jaldi-five-notif-fetch","Notifications::jaldi_five");
+$routes->post("daily-horoscope-api","DailyHoroscopes::daily_horoscope");
 
 $routes->get("subscribers-mgt","PageLoader::manage_subscribers");
 $routes->get("add-new-subscriber","PageLoader::add_new_subscriber");

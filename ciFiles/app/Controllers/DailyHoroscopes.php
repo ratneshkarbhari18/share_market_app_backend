@@ -56,7 +56,7 @@ class DailyHoroscopes extends BaseController
         return redirect()->route('daily-horoscopes');
     }
 
-    public function jaldi_five(){
+    public function daily_horoscope(){
         $api_key = $this->request->getPost("api_key");
         if($api_key!="5f4dbf2e5629d8cc19e7d51874266678"){
             return json_encode(
@@ -66,12 +66,13 @@ class DailyHoroscopes extends BaseController
                 )
             );
         }
-        $notifModel = new NotifModel();
-        $notifications = $notifModel->orderBy("id","desc")->findAll();
+        $dailyHoroscopeModel = new DailyHoroscopeModel();
+        $date = $this->request->getPost("date");
+        $horoscope = $dailyHoroscopeModel->where("date",$date)->first();
         return json_encode(
             array(
                 "result" => "success",
-                "notifications" => $notifications
+                "horoscope" => $horoscope["horoscopes"]
             )
         );
     }
