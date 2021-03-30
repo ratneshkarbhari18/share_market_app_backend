@@ -58,6 +58,8 @@ $routes->post("subscriber-register-api","Authentication::subscriber_register");
 $routes->post("lead-gen-contact-form-api","Contact::save_contact_message");
 $routes->get("contact-form-messages","PageLoader::contact_form_messages");
 
+$routes->post("record-service-interest","Leads::create_lead");
+$routes->get("manage-service-leads","PageLoader::manage_leads");
 /*
  * --------------------------------------------------------------------
  * Additional Routing

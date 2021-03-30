@@ -84,22 +84,23 @@ class PageLoader extends BaseController
 		);
 		$this->page_loader("manage_subscribers",$data);
 	}
+	
 
-	public function contact_form_messages($success="",$error=""){
+	public function manage_leads($success="",$error=""){
 		$session = session();
 		$role = $session->get("role");
 		if($role!="admin"){
 			return redirect()->route("/");
 		}
 		$leadModel = new LeadModel();
-		$messages = array_reverse($leadModel->findAll());
+		$leads = array_reverse($leadModel->findAll());
 		$data = array(
-			"title" => "From Contact Form",
-			"messages" => $messages,
+			"title" => "From Service Page on App",
+			"leads" => $leads,
 			"success" => $success,
 			"error" => $error
 		);
-		$this->page_loader("manage_messages",$data);
+		$this->page_loader("manage_leads",$data);
 	}
 
 	public function add_new_subscriber($success="",$error=""){

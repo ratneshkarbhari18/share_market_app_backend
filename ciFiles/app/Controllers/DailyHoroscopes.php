@@ -36,7 +36,10 @@ class DailyHoroscopes extends BaseController
             "horoscopes" => json_encode($horoScopes)
         );
         $horoscopeModel = new DailyHoroscopeModel();
-        $created = $horoscopeModel->insert($horoScopeData);
+        $exists = $horoscopeModel->where("date",$date)->first();
+        if(!$exists){
+            $created = $horoscopeModel->insert($horoScopeData);
+        }
         if($created){
             return redirect()->route('daily-horoscopes');
         }
@@ -72,7 +75,7 @@ class DailyHoroscopes extends BaseController
         return json_encode(
             array(
                 "result" => "success",
-                "horoscope" => $horoscope["horoscopes"]
+                "data" => json_encode($horoscope)
             )
         );
     }

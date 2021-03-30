@@ -25,7 +25,7 @@
                         </div></li>
                         <li><a class="waves-effect" href="<?php echo site_url(); ?>">Dashboard</a></li>
                         <li><a class="waves-effect" href="<?php echo site_url("daily-horoscopes"); ?>">Daily Horoscopes</a></li>
-                        <li><a class="waves-effect" href="<?php echo site_url("contact-form-messages"); ?>">Contact Form Messages</a></li>
+                        <li><a class="waves-effect" href="<?php echo site_url("manage-service-leads"); ?>">Manage Service Leads</a></li>
                     </ul>
                     <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                     <a href="<?php echo site_url("/"); ?>" class="brand-logo center">App Backend</a>
