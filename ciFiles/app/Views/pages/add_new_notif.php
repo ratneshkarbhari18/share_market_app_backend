@@ -8,21 +8,14 @@
         <form action="<?php echo site_url("create-notification-exe"); ?>" method="post">
             
             <div class="mb-3">
-                <label for="name">Name</label>
-                <input type="text" name="name" id="name" class="form-control">
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title" class="form-control">
             </div>
             <div class="mb-3">
-                <label for="current_price">Current Price</label>
-                <input type="text" name="current_price" id="current_price" class="form-control">
+                <label for="details">Details</label>
+                <textarea name="details" id="details" class="materialize-textarea"></textarea>
             </div>
-            <div class="mb-3">
-                <label for="buy_price">Buy Price</label>
-                <input type="text" name="buy_price" id="buy_price" class="form-control">
-            </div>
-            <div class="mb-3">
-                <label for="stop_loss">Stop Loss</label>
-                <input type="text" name="stop_loss" id="stop_loss" class="form-control">
-            </div>
+            
 
             <br>
             <button type="submit" class="btn btn-success">Add Notification</button>

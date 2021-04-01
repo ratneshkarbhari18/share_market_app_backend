@@ -33,7 +33,7 @@ class DailyHoroscopes extends BaseController
         $horoScopeData = array(
             "title" => $title,
             "date" => $date,
-            "horoscopes" => json_encode($horoScopes)
+            "data" => json_encode($horoScopes)
         );
         $horoscopeModel = new DailyHoroscopeModel();
         $exists = $horoscopeModel->where("date",$date)->first();
@@ -41,6 +41,37 @@ class DailyHoroscopes extends BaseController
             $created = $horoscopeModel->insert($horoScopeData);
         }
         if($created){
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://fcm.googleapis.com/fcm/send',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS =>'{
+                "notification": {
+                    "title": "Daily Horoscope",
+                    "body": "'.$title.'"
+                },
+                "priority": "high",
+                "data": {
+                    "clickaction": "FLUTTER_NOTIFICATION_CLICK",
+                    "id": "1",
+                    "status": "done"
+                },
+                "to": "/topics/all"
+            }',
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json',
+                'Authorization: key=AAAAfoZlGsg:APA91bHHlG3fOZ6HnY3STcYVfCkEGAfp08VZQ6hJRCUdq4bgQYOzYPBI6eULhzRX013K5rXRBs4V-OOKsO_Vb6orCEnU2lelp3mJDXn6S4yR-9a2pqWmFTzFETenRs21cdFI0r_0tsJ6'
+            ),
+            ));
+
+            $response = curl_exec($curl);
+            var_dump($response);
             return redirect()->route('daily-horoscopes');
         }
     }

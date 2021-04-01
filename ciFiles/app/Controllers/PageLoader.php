@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use App\Models\DailyHoroscopeModel;
 use App\Models\AuthModel;
+use App\Models\NotificationModel;
 use App\Models\LeadModel;
 
 class PageLoader extends BaseController
@@ -83,6 +84,37 @@ class PageLoader extends BaseController
 			"error" => $error
 		);
 		$this->page_loader("manage_subscribers",$data);
+	}
+
+	public function add_new_notification($success="",$error=""){
+		$session = session();
+		$role = $session->get("role");
+		if($role!="admin"){
+			return redirect()->route("/");
+		}
+		$data = array(
+			"title" => "Add New Notification",
+			"success" => $success,
+			"error" => $error
+		);
+		$this->page_loader("add_new_notif",$data);
+	}
+
+	public function manage_notifications($success="",$error=""){
+		$session = session();
+		$role = $session->get("role");
+		if($role!="admin"){
+			return redirect()->route("/");
+		}
+		$notificationModel = new NotificationModel();
+		$allNotifs = $notificationModel->findAll();
+		$data = array(
+			"title" => "Manage Notifications",
+			"notifications" => $allNotifs,
+			"success" => $success,
+			"error" => $error
+		);
+		$this->page_loader("manage_notifications",$data);
 	}
 	
 

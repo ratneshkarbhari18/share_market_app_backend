@@ -13,20 +13,16 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <td style="font-size: 1.2rem; font-weight: 500;">Name</td>
-                        <td style="font-size: 1.2rem; font-weight: 500;">Current Price</td>
-                        <td style="font-size: 1.2rem; font-weight: 500;">Buy Price</td>
-                        <td style="font-size: 1.2rem; font-weight: 500;">Stop Loss</td>
+                        <td style="font-size: 1.2rem; font-weight: 500;">Title</td>
+                        <td style="font-size: 1.2rem; font-weight: 500;">Details</td>
                         <td style="font-size: 1.2rem; font-weight: 500;">Actions</td>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach($notifications as $notification): ?>
                     <tr>
-                        <td><?php echo $notification['name']; ?></td>
-                        <td><?php echo $notification['market_price']; ?></td>
-                        <td><?php echo $notification['buy_price']; ?></td>
-                        <td><?php echo $notification['stop_loss']; ?></td>
+                        <td><?php echo $notification['title']; ?></td>
+                        <td><?php echo $notification['details']; ?></td>
                         <td>
                             <form action="<?php echo site_url('delete-notification-exe'); ?>" style="display: inline;" method="post">
                                 <input type="hidden" name="id" value="<?php echo $notification['id']; ?>">

@@ -9,6 +9,6 @@ class DailyHoroscopeModel extends Model
 
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['title', 'horoscopes','date'];
+    protected $allowedFields = ['title', 'data','date'];
 
 }

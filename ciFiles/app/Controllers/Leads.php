@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\LeadModel;
+use App\Models\QuestionModel;
 use App\Controllers\PageLoader;
 
 class Leads extends BaseController
@@ -68,6 +69,48 @@ class Leads extends BaseController
 
         
 
+        
+
+    }
+
+    public function save_question(){
+        $api_key = $this->request->getPost("api_key");
+        if($api_key!="5f4dbf2e5629d8cc19e7d51874266678"){
+            return json_encode(
+                array(
+                    "result" => "failure",
+                    "reason" => "API Key is incorrect"
+                )
+            );
+        }
+        
+        $dataToInsert = array(
+            "first_name" => $this->request->getPost("first_name"),
+            "last_name" => $this->request->getPost("last_name"),
+            "contact_number" => $this->request->getPost("contact_number"),
+            "question" => $this->request->getPost("question"),
+        );
+
+        $questionModel = new QuestionModel();
+
+        $questionExists = $questionModel->where("contact_number",$this->request->getPost("contact_number"))->where("question",$this->request->getPost("question"))->first();
+
+        if ($questionExists) {
+            return json_encode(
+                array(
+                    "result" => "failure",
+                    "reason" => "Question already exists for your Contact number"
+                )
+            );
+        } else {
+            $questionModel->insert($dataToInsert);
+            return json_encode(
+                array(
+                    "result" => "success",
+                    "reason" => "Question added"
+                )
+            );
+        }
         
 
     }
