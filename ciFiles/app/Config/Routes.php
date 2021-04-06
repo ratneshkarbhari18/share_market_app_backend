@@ -73,6 +73,10 @@ $routes->post("create-notification-exe","Notifications::add_new");
 
 $routes->post("fetch-notifications-api","Notifications::fetchApi");
 
+$routes->get("manage-slider-images","PageLoader::update_slider_images");
+$routes->post("upload-slider-image","SliderImages::upload");
+$routes->post("delete-slider-image","SliderImages::delete");
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

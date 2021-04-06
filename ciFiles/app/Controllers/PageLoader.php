@@ -5,6 +5,8 @@ use App\Models\DailyHoroscopeModel;
 use App\Models\AuthModel;
 use App\Models\NotificationModel;
 use App\Models\LeadModel;
+use App\Models\SliderImagesModel;
+
 
 class PageLoader extends BaseController
 {
@@ -13,6 +15,23 @@ class PageLoader extends BaseController
 		echo view("templates/header",$data);
 		echo view("pages/".$viewName,$data);
 		echo view("templates/footer",$data);
+	}
+
+	public function update_slider_images($success="",$error=""){
+		$session = session();
+		$logged_in = $session->get("logged_in");
+		if(!$logged_in){
+			$this->dashboard();
+		}
+		$sliderImageModel = new SliderImagesModel();
+		$sliderImages = $sliderImageModel->findAll();
+		$data = array(
+			"title" => "Update Slider Images",
+			"success" => $success,
+			"error" => $error,
+			"slider_images" => $sliderImages
+		);
+		$this->page_loader("update_slider_images",$data);
 	}
 
 	public function dashboard(){
