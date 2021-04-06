@@ -102,7 +102,8 @@ class DailyHoroscopes extends BaseController
         }
         $dailyHoroscopeModel = new DailyHoroscopeModel();
         $date = $this->request->getPost("date");
-        $horoscope = $dailyHoroscopeModel->where("date",$date)->first();
+        $horoscopes = array_reverse($dailyHoroscopeModel->findAll());
+        $horoscope = $horoscopes[0];
         return json_encode(
             array(
                 "result" => "success",

@@ -68,5 +68,25 @@ class Notifications extends BaseController
         }
     }
 
+    public function fetchApi(){
+        $api_key = $this->request->getPost("api_key");
+        if($api_key!="5f4dbf2e5629d8cc19e7d51874266678"){
+            return json_encode(
+                array(
+                    "result" => "failure",
+                    "reason" => "API Key is incorrect"
+                )
+            );
+        }
+        $notifModel = new NotificationModel();
+        $allNotifs = array_reverse($notifModel->orderBy('id','desc')->findAll(5,0));
+        return json_encode(
+            array(
+                "result" => "success",
+                "data" => json_encode($allNotifs)
+            )
+        );
+    }
+
 
 }

@@ -29,7 +29,7 @@
                             <?php endforeach; ?>
                         </td>
                         <td>
-                            <form action="<?php echo site_url('p'); ?>" style="display: inline;" method="post">
+                            <form action="<?php echo site_url('delete-horoscope-exe'); ?>" style="display: inline;" method="post">
                                 <input type="hidden" name="id" value="<?php echo $horoscope['id']; ?>">
                                 <button type="submit" class="btn red">Delete</button>
                             </form>

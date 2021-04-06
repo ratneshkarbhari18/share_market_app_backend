@@ -66,9 +66,12 @@ $routes->post("send-question-api","Leads::save_question");
 $routes->get("manage-notifications","PageLoader::manage_notifications");
 $routes->get("add-new-notification","PageLoader::add_new_notification");
 
+
 $routes->post("delete-notification-exe","Notifications::delete");
 
 $routes->post("create-notification-exe","Notifications::add_new");
+
+$routes->post("fetch-notifications-api","Notifications::fetchApi");
 
 /*
  * --------------------------------------------------------------------
